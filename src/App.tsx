@@ -3,7 +3,7 @@ import "./App.css";
 import { Root } from "./types";
 import { useEffect, useState } from "react";
 
-function DisplayLocations() {
+function DisplayMovies() {
   const GET_FILMS = gql`
     query Root {
       allFilms {
@@ -43,7 +43,7 @@ function App() {
     <div>
       <h2>React TypeScript GraphQL Apollo 🚀</h2>
       <br />
-      <DisplayLocations />
+      <DisplayMovies />
     </div>
   );
 }
