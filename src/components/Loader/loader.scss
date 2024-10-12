@@ -1,0 +1,18 @@
+.loader {
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 300px;
+  height: 300px;
+  position: relative;
+  &-text {
+    position: absolute;
+    color: #ffd700;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+  }
+}
