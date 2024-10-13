@@ -27,6 +27,7 @@ export const CustomTable = <T extends Person>({
   const [currentPage, setCurrentPage] = useState(1);
   const [currentSearchValue, setCurrentSearchValue] = useState("");
 
+  const excelData: Person[] = [];
   //Memoization
   const filteredData = useMemo(() => {
     return data.filter((item) => {
@@ -51,6 +52,17 @@ export const CustomTable = <T extends Person>({
     return filteredData.slice(startIndex, startIndex + itemPerPage);
   }, [filteredData, currentPage, itemPerPage]);
 
+  filteredData.forEach((item) => {
+    excelData.push({
+      id: "*",
+      name: item.name,
+      gender: item.gender,
+      birthYear: item.birthYear,
+      height: item.height,
+      mass: item.mass,
+    });
+  });
+
   //Handlers
   const onSelectRows = (value: number) => {
     setCurrentPage(1);
@@ -67,7 +79,7 @@ export const CustomTable = <T extends Person>({
           setCurrentPage={setCurrentPage}
           setCurrentSearchValue={setCurrentSearchValue}
           currentSearchValue={currentSearchValue}
-          dataToExport={filteredData}
+          dataToExport={excelData}
         />
         <TableHeader
           itemPerPage={itemPerPage}
