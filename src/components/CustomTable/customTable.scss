@@ -1,18 +1,30 @@
 .custom-table {
-  width: 100%;
+  width: 900px;
   min-height: 300px;
-  max-height: 500px;
+  max-height: 600px;
   background-color: #18181b;
   border-radius: 8px;
   display: flex;
-
   flex-direction: column;
   justify-content: space-between;
+  @media (max-width: 980px) {
+    width: 100%;
+  }
+  @media (max-width: 500px) {
+    font-size: 14px;
+  }
+  @media (max-width: 350px) {
+    font-size: 12px;
+  }
+
   &-content {
     display: flex;
     flex-direction: column;
     overflow: hidden;
     gap: 16px;
+    @media (max-width: 350px) {
+      overflow: auto;
+    }
   }
   &-row-select {
     position: relative;
@@ -20,9 +32,18 @@
     align-items: center;
     gap: 8px;
     color: #a1a1aa;
-
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
+    &-filters {
+      background-color: #81d4fa50;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      &:hover {
+        color: #ffd700;
+      }
+    }
 
     .dropdown-wrapper {
       position: relative;
@@ -58,6 +79,8 @@
   &-cell {
     flex: 1;
     text-align: left;
+    display: flex;
+    align-items: center;
   }
   &-actions {
     display: flex;
@@ -130,32 +153,21 @@
   }
   &-footer {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     width: 100%;
-
-    &-pages {
-      padding: 8px 16px;
-      border-radius: 8px;
-      background-color: #27272a;
-      width: min-content;
+    gap: 16px;
+    align-items: center;
+    &-button {
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: #81d4fa50;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 8px;
       cursor: pointer;
-      &-icon {
-        padding: 0px 16px;
-      }
-      &-number-wrapper {
-        display: flex;
-        gap: 16px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      &-number {
-        color: white;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
+      &:hover {
+        color: #ffd700;
       }
     }
   }
@@ -169,4 +181,5 @@
   align-items: center;
   justify-content: center;
   padding: 5px;
+  border-radius: 8px;
 }

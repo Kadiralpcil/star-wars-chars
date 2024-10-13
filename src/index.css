@@ -9,4 +9,18 @@ body {
   margin: 0;
 }
 
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding-top: 50px;
 
+}
+.main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
