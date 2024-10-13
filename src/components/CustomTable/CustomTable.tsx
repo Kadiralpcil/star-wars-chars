@@ -66,6 +66,7 @@ export const CustomTable = <T extends Person>({
           setCurrentPage={setCurrentPage}
           setCurrentSearchValue={setCurrentSearchValue}
           currentSearchValue={currentSearchValue}
+          dataToExport={filteredData}
         />
         <TableHeader
           itemPerPage={itemPerPage}
