@@ -77,7 +77,7 @@ export const Home = () => {
   }
 
   return (
-    <div className="main">
+    <>
       {loading || loadingFilms || loadingSpecies ? (
         <Loader />
       ) : (
@@ -138,23 +138,30 @@ export const Home = () => {
               </div>
             </div>
           </Modal>
-          <Card className="main-card">
-            <div onClick={() => setFilterModalOpen(true)} className="filters">
-              Filters
+          <div className="main">
+            <div className="main-wrapper">
+              <Card className="main-card">
+                <div
+                  onClick={() => setFilterModalOpen(true)}
+                  className="filters"
+                >
+                  Filters
+                </div>
+                <CustomTable<Person>
+                  columns={[
+                    { header: "Name", key: "name" },
+                    { header: "Gender", key: "gender" },
+                    { header: "Birth Year", key: "birthYear" },
+                    { header: "Height (Cm)", key: "height" },
+                    { header: "Mass (Kg)", key: "mass" },
+                  ]}
+                  data={filteredPeople}
+                />
+              </Card>
             </div>
-            <CustomTable<Person>
-              columns={[
-                { header: "Name", key: "name" },
-                { header: "Gender", key: "gender" },
-                { header: "Birth Year", key: "birthYear" },
-                { header: "Height (Cm)", key: "height" },
-                { header: "Mass (Kg)", key: "mass" },
-              ]}
-              data={filteredPeople}
-            />
-          </Card>
+          </div>
         </>
       )}
-    </div>
+    </>
   );
 };

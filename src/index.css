@@ -9,32 +9,9 @@ body {
   margin: 0;
 }
 
-.main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  padding-top: 70px;
-  flex-direction: column;
-}
-.main-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60%;
-}
-.main-card{
-  padding: 0;
-}
+
 .error {
   text-align: center;
   font-size: 1.8rem;
   color: #ff4757;
-}
-.filters{
-  padding:4px 24px;
-  color: #ffd700;
-  font-weight:600 ;
-  cursor: pointer;
 }

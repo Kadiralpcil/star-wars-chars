@@ -3,19 +3,19 @@ import { IoSearch } from "react-icons/io5";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
-interface SearchInputProps {
+interface ActionsProps {
   setCurrentPage: (value: number) => void;
   currentSearchValue: string;
   setCurrentSearchValue: (value: string) => void;
   dataToExport: unknown[];
 }
 
-const SearchInput = ({
+const Actions = ({
   setCurrentPage,
   setCurrentSearchValue,
   currentSearchValue,
   dataToExport,
-}: SearchInputProps) => {
+}: ActionsProps) => {
   const exportToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(dataToExport);
     const workbook = XLSX.utils.book_new();
@@ -50,4 +50,4 @@ const SearchInput = ({
   );
 };
 
-export default SearchInput;
+export default Actions;

@@ -2,11 +2,10 @@ import { useMemo, useState } from "react";
 
 import "./customTable.scss";
 //Components
-import Card from "../Card";
 import Pagination from "./Pagination";
 import TableBody from "./TableBody";
 import TableHeader from "./TableHeader";
-import SearchInput from "./SearchInput";
+import Actions from "./Actions";
 import { Person } from "../../types";
 
 interface Column<T> {
@@ -60,9 +59,9 @@ export const CustomTable = <T extends Person>({
   };
 
   return (
-    <Card className="custom-table">
+    <div className="custom-table">
       <div className="custom-table-content">
-        <SearchInput
+        <Actions
           setCurrentPage={setCurrentPage}
           setCurrentSearchValue={setCurrentSearchValue}
           currentSearchValue={currentSearchValue}
@@ -81,6 +80,6 @@ export const CustomTable = <T extends Person>({
         handlePageChange={handlePageChange}
         totalCount={totalCount}
       />
-    </Card>
+    </div>
   );
 };

@@ -39,6 +39,40 @@
     }
   }
 }
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding-top: 30px;
+  flex-direction: column;
+}
+.main-wrapper {
+  width: 900px;
+  background-color: #18181b;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @media (max-width: 980px) {
+    width: 100%;
+  }
+  @media (max-width: 500px) {
+    font-size: 14px;
+  }
+  @media (max-width: 350px) {
+    font-size: 12px;
+  }
+}
+.main-card {
+  height: 100%;
+}
+.filters {
+  padding: 4px 24px;
+  color: #ffd700;
+  font-weight: 600;
+  cursor: pointer;
+}
 .selected {
   color: #ffd700;
 }
