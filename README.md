@@ -41,4 +41,4 @@ yarn dev
 
 Projeyi test etmek için aşağıdaki bağlantıyı kullanabilirsiniz:
 
-[Başlıklı Bağlantı](https://www.kadiralpcil.com/about "Proje")
+[Canlı Demo](https://https://star-wars-chars.vercel.app/ "Proje")
