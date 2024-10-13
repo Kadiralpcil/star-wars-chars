@@ -1,9 +1,7 @@
 .custom-table {
   width: 900px;
-  min-height: 300px;
-  max-height: 600px;
+  height: 550px;
   background-color: #18181b;
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -26,25 +24,54 @@
       overflow: auto;
     }
   }
-  &-row-select {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #a1a1aa;
-    display: flex;
-    justify-content: space-between;
-    &-filters {
-      background-color: #81d4fa50;
+  &-filters {
+    background-color: #81d4fa50;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    &:hover {
+      color: #ffd700;
+    }
+    &-wrapper {
+      display: flex;
+      gap: 4px;
+    }
+    &-name {
+      background-color: #81d4fa10;
       color: white;
       padding: 4px 8px;
       border-radius: 8px;
       cursor: pointer;
+      display: flex;
       &:hover {
         color: #ffd700;
       }
     }
+    &-input {
+      width: 100px;
+      background-color: transparent;
+      border: none;
+      color: #e4e4e7;
+      padding-left: 8px;
+      font-size: 14px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  &-row-select {
+    position: relative;
+    align-items: center;
+    color: #a1a1aa;
+    display: flex;
+    justify-content: end;
 
+    &-rows {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
     .dropdown-wrapper {
       position: relative;
       cursor: pointer;
@@ -60,7 +87,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
         .dropdown-item {
           padding: 8px;
           cursor: pointer;
@@ -79,8 +105,6 @@
   &-cell {
     flex: 1;
     text-align: left;
-    display: flex;
-    align-items: center;
   }
   &-actions {
     display: flex;
@@ -153,21 +177,31 @@
   }
   &-footer {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     width: 100%;
-    gap: 16px;
-    align-items: center;
-    &-button {
+    &-pages {
+      padding: 8px 16px;
+      border-radius: 8px;
+      background-color: #27272a;
+      width: min-content;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #81d4fa50;
-      color: white;
-      padding: 4px 8px;
-      border-radius: 8px;
       cursor: pointer;
-      &:hover {
-        color: #ffd700;
+      &-icon {
+        padding: 0px 16px;
+      }
+      &-number-wrapper {
+        display: flex;
+        gap: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      &-number {
+        color: white;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
       }
     }
   }
@@ -181,5 +215,4 @@
   align-items: center;
   justify-content: center;
   padding: 5px;
-  border-radius: 8px;
 }

@@ -1,104 +1,84 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import "./customTable.scss";
-
+//Components
 import Card from "../Card";
-import Loader from "../Loader";
-
-import { FaArrowDown } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
-
-import SearchInput from "./SearchInput";
-import TableHeader from "./TableHeader";
 import Pagination from "./Pagination";
 import TableBody from "./TableBody";
+import TableHeader from "./TableHeader";
+import SearchInput from "./SearchInput";
+import { Person } from "../../types";
 
 interface Column<T> {
   header: string;
   key: keyof T;
 }
-
-interface CustomTableProps<T extends { id: string; name?: string | null }> {
+interface CustomTableProps<T extends Person> {
   columns: Column<T>[];
   data?: T[];
-  onLoading?: boolean;
-  itemPerPage: number;
-  totalCount: number;
-  onSelectItemPerPage: (value: number) => void;
-  onPageChange: (value: number) => void;
-  currentPage: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
-
-export const CustomTable = <T extends { id: string; name?: string | null }>({
+export const CustomTable = <T extends Person>({
   columns,
   data = [],
-  onLoading,
-  itemPerPage,
-  onSelectItemPerPage,
-  totalCount,
-  onPageChange,
-  currentPage,
-  setCurrentPage,
 }: CustomTableProps<T>) => {
+  // States
+  const [itemPerPage, setItemPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
   const [currentSearchValue, setCurrentSearchValue] = useState("");
-  const [filtersOpen, setFiltersOpen] = useState(false);
 
-  const navigate = useNavigate();
-
+  //Memoization
   const filteredData = useMemo(() => {
-    return data.filter((item) =>
-      item.name?.toLowerCase().includes(currentSearchValue.toLowerCase())
-    );
+    return data.filter((item) => {
+      const searchValue = currentSearchValue.toLowerCase();
+
+      return (
+        item.name?.toLowerCase().includes(searchValue) ||
+        item.gender?.toLowerCase().includes(searchValue) ||
+        item.birthYear?.toString().toLowerCase().includes(searchValue) ||
+        item.mass?.toString().includes(searchValue) ||
+        item.height?.toString().includes(searchValue)
+      );
+    });
   }, [currentSearchValue, data]);
 
-  const pages = useMemo(
-    () => Math.ceil(totalCount / itemPerPage),
-    [totalCount, itemPerPage]
+  const totalCount = useMemo(
+    () => Math.ceil(filteredData.length / itemPerPage),
+    [filteredData, itemPerPage]
   );
-
   const paginatedData = useMemo(() => {
     const startIndex = (currentPage - 1) * itemPerPage;
     return filteredData.slice(startIndex, startIndex + itemPerPage);
   }, [filteredData, currentPage, itemPerPage]);
 
-  const handleItemClick = (value: number) => {
-    onSelectItemPerPage(value);
+  //Handlers
+  const onSelectRows = (value: number) => {
+    setCurrentPage(1);
+    setItemPerPage(value);
   };
-
-  if (onLoading) return <Loader />;
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   return (
     <Card className="custom-table">
       <div className="custom-table-content">
-        <div className="custom-table-actions">
-          <SearchInput
-            searchValue={currentSearchValue}
-            setSearchValue={setCurrentSearchValue}
-          />
-          <FaArrowDown />
-        </div>
+        <SearchInput
+          setCurrentPage={setCurrentPage}
+          setCurrentSearchValue={setCurrentSearchValue}
+          currentSearchValue={currentSearchValue}
+        />
         <TableHeader
           itemPerPage={itemPerPage}
-          handleItemClick={handleItemClick}
-          filtersOpen={filtersOpen}
-          setFiltersOpen={setFiltersOpen}
+          onSelectRows={onSelectRows}
           setCurrentPage={setCurrentPage}
+          columns={columns}
         />
-        {filtersOpen && <div className="custom-table-filters">Gender</div>}
-        <div className="custom-table-header">
-          {columns.map((col) => (
-            <div key={col.key as string} className="custom-table-cell">
-              {col.header}
-            </div>
-          ))}
-        </div>
-        <TableBody columns={columns} data={paginatedData} navigate={navigate} />
+        <TableBody columns={columns} data={paginatedData} />
       </div>
       <Pagination
         currentPage={currentPage}
-        pages={pages}
-        onPageChange={onPageChange}
+        handlePageChange={handlePageChange}
+        totalCount={totalCount}
       />
     </Card>
   );

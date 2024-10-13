@@ -1,22 +1,32 @@
+import { FaArrowDown } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 
 interface SearchInputProps {
-  searchValue: string;
-  setSearchValue: (value: string) => void;
+  setCurrentPage: (value: number) => void;
+  currentSearchValue: string;
+  setCurrentSearchValue: (value: string) => void;
 }
 
-const SearchInput = ({ searchValue, setSearchValue }: SearchInputProps) => {
+const SearchInput = ({
+  setCurrentPage,
+  setCurrentSearchValue,
+  currentSearchValue,
+}: SearchInputProps) => {
   return (
-    <div className="custom-table-actions-search">
-      <IoSearch />
-      <input
-        type="text"
-        placeholder="Search by name..."
-        onChange={(e) => {
-          setSearchValue(e.target.value);
-        }}
-        value={searchValue}
-      />
+    <div className="custom-table-actions">
+      <div className="custom-table-actions-search">
+        <IoSearch />
+        <input
+          type="text"
+          placeholder="Search..."
+          onChange={(e) => {
+            setCurrentSearchValue(e.target.value);
+            setCurrentPage(1);
+          }}
+          value={currentSearchValue}
+        />
+      </div>
+      <FaArrowDown />
     </div>
   );
 };

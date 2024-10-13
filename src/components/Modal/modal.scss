@@ -1,0 +1,45 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  padding: 0 24px 24px;
+  margin: 16px;
+  border-radius: 8px;
+  width: 300px;
+  max-width: 100%;
+  position: relative;
+  outline: none;
+  overflow-x: auto;
+  max-height: 95%;
+  background-color: #000;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #ffd700;
+    border-radius: 8px;
+  }
+}
+
+.close-button {
+  position: sticky;
+  top: 0px;
+  right: -20px;
+  left: -20px;
+  cursor: pointer;
+  color: var(--color-primary);
+  text-align: right;
+  background: var(--color-white);
+  z-index: 10;
+  padding: 16px 0;
+  color: #ffd700;
+}
