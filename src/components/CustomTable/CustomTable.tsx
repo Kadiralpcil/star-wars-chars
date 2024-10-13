@@ -6,6 +6,8 @@ import Pagination from "./Pagination";
 import TableBody from "./TableBody";
 import TableHeader from "./TableHeader";
 import Actions from "./Actions";
+
+//Types
 import { Person } from "../../types";
 
 interface Column<T> {

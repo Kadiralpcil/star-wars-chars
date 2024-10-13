@@ -1,42 +1,37 @@
-import { useQuery } from "@apollo/client";
-import CustomTable from "../../components/CustomTable";
-import Card from "../../components/Card";
-import Modal from "../../components/Modal";
 import { useMemo, useState } from "react";
+
 import "./home.scss";
+
+//Types
 import {
   AllFilmQuery,
   AllPeopleQuery,
   AllSpeciesQuery,
   FilterSelect,
 } from "../../customTypes";
+import { Person } from "../../types";
+
+//Queries
+import { useQuery } from "@apollo/client";
 import {
   GET_ALL_PEOPLE,
   GET_ALL_FILMS,
   GET_ALL_SPECIES,
-} from "../../Queries/queries";
-import { Person } from "../../types";
+} from "../../queries/queries";
+
+//Components
 import Loader from "../../components/Loader";
+import CustomTable from "../../components/CustomTable";
+import Card from "../../components/Card";
+import { FilterModal } from "./FilterModal";
 
 export const Home = () => {
+  //States
   const [selectedMovies, setSelectedMovies] = useState<FilterSelect[]>([]);
   const [selectedSpecies, setSelectedSpecies] = useState<FilterSelect[]>([]);
   const [isFilterModalOpen, setFilterModalOpen] = useState(false);
 
-  const updateSelectedItems = (
-    selectedItems: FilterSelect[],
-    setSelectedItems: React.Dispatch<React.SetStateAction<FilterSelect[]>>,
-    id: string,
-    name: string
-  ) => {
-    const isSelected = selectedItems.some((item) => item.id === id);
-    setSelectedItems((prev) =>
-      isSelected
-        ? prev.filter((item) => item.id !== id)
-        : [...prev, { id, name }]
-    );
-  };
-
+  //Queries
   const {
     loading: loadingSpecies,
     data: speciesData,
@@ -49,6 +44,7 @@ export const Home = () => {
   } = useQuery<AllFilmQuery>(GET_ALL_FILMS);
   const { loading, data, error } = useQuery<AllPeopleQuery>(GET_ALL_PEOPLE);
 
+  //Memoization
   const filteredPeople = useMemo(() => {
     return (
       data?.allPeople.people
@@ -82,62 +78,16 @@ export const Home = () => {
         <Loader />
       ) : (
         <>
-          <Modal
-            className="home-modal"
-            show={isFilterModalOpen}
-            onClose={() => setFilterModalOpen(false)}
-          >
-            <div className="home-modal-content-wrapper">
-              <div className="home-modal-title">Movies</div>
-              <div className="home-modal-value-wrapper">
-                {filmsData?.allFilms.films.map((item) => (
-                  <div
-                    key={item.id}
-                    onClick={() =>
-                      updateSelectedItems(
-                        selectedMovies,
-                        setSelectedMovies,
-                        item.id,
-                        item.title
-                      )
-                    }
-                    className={`home-modal-value ${
-                      selectedMovies.some((movie) => movie.id === item.id)
-                        ? "selected"
-                        : ""
-                    }`}
-                  >
-                    {item.title}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="home-modal-content-wrapper">
-              <div className="home-modal-title">Species</div>
-              <div className="home-modal-value-wrapper">
-                {speciesData?.allSpecies.species.map((item) => (
-                  <div
-                    key={item.id}
-                    onClick={() =>
-                      updateSelectedItems(
-                        selectedSpecies,
-                        setSelectedSpecies,
-                        item.id,
-                        item.name
-                      )
-                    }
-                    className={`home-modal-value ${
-                      selectedSpecies.some((species) => species.id === item.id)
-                        ? "selected"
-                        : ""
-                    }`}
-                  >
-                    {item.name}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Modal>
+          <FilterModal
+            isFilterModalOpen={isFilterModalOpen}
+            setFilterModalOpen={setFilterModalOpen}
+            filmsData={filmsData}
+            speciesData={speciesData}
+            selectedMovies={selectedMovies}
+            setSelectedMovies={setSelectedMovies}
+            selectedSpecies={selectedSpecies}
+            setSelectedSpecies={setSelectedSpecies}
+          />
           <div className="main">
             <div className="main-wrapper">
               <Card className="main-card">

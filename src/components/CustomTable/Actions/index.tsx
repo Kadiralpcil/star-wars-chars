@@ -1,8 +1,8 @@
-import { FaArrowDown } from "react-icons/fa6";
-import { IoSearch } from "react-icons/io5";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
+import { FaArrowDown } from "react-icons/fa6";
+import { IoSearch } from "react-icons/io5";
 interface ActionsProps {
   setCurrentPage: (value: number) => void;
   currentSearchValue: string;
@@ -44,7 +44,6 @@ const Actions = ({
           value={currentSearchValue}
         />
       </div>
-      {/* FaArrowDown simgesine Excel'e export işlevselliği ekliyoruz */}
       <FaArrowDown onClick={exportToExcel} style={{ cursor: "pointer" }} />
     </div>
   );
