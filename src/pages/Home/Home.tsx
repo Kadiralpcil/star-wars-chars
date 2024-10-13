@@ -13,11 +13,7 @@ import { Person } from "../../types";
 
 //Queries
 import { useQuery } from "@apollo/client";
-import {
-  GET_ALL_PEOPLE,
-  GET_ALL_FILMS,
-  GET_ALL_SPECIES,
-} from "../../queries/queries";
+import { GET_ALL_PEOPLE, GET_ALL_FILMS, GET_ALL_SPECIES } from "../../services";
 
 //Components
 import Loader from "../../components/Loader";
