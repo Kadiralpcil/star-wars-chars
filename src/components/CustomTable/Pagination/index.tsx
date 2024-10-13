@@ -10,7 +10,7 @@ const Pagination = ({ currentPage, pages, onPageChange }: PaginationProps) => {
   return (
     <div className="custom-table-footer">
       <div>
-        {currentPage} of {pages}{" "}
+        {currentPage} of {pages}
       </div>
       <div
         onClick={() => currentPage !== 1 && onPageChange(currentPage - 1)}
